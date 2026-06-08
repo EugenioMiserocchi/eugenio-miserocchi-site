@@ -1,0 +1,188 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import ContactForm from '../components/ContactForm.tsx'
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contatti Eugenio Miserocchi',
+  url: 'https://eugeniomiserocchi.it/contatti',
+}
+---
+
+<BaseLayout
+  title="Contatti Avvia un progetto | Eugenio Miserocchi"
+  description="Raccontami il tuo progetto: obiettivo, contesto e budget. Ti rispondo entro 24 ore lavorative con una valutazione concreta. Nessuna mailing list, nessun auto-responder."
+  schema={schema}
+>
+  <style>
+    .page-hero {
+      padding-top: clamp(56px, 8vw, 96px);
+      padding-bottom: clamp(48px, 6vw, 72px);
+    }
+
+    .contact-aside {
+      position: sticky;
+      top: 120px;
+    }
+    .aside-block {
+      margin-bottom: 36px;
+    }
+    .aside-block h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    .aside-block p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .aside-info {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .aside-info li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14.5px;
+      color: var(--ink-2);
+    }
+    .aside-info li .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      flex: 0 0 36px;
+    }
+  </style>
+
+  <section class="page-hero">
+    <div class="wrap reveal">
+      <div class="eyebrow" style="margin-bottom:24px">
+        <span class="dot"></span>
+        <span>Contatti</span>
+      </div>
+      <h1>Hai un progetto? Partiamo da qui.</h1>
+      <p
+        style="color:var(--muted); font-size:clamp(17px, 1.35vw, 19.5px); max-width:62ch; line-height:1.6"
+      >
+        Compila il form con le informazioni essenziali. Ti rispondo io
+        direttamente, entro 24 ore lavorative, con una valutazione concreta non
+        con un template.
+      </p>
+    </div>
+  </section>
+
+  <div class="y2k-divider" aria-hidden="true">
+    <span class="mark"><i></i><i></i><i></i></span>
+  </div>
+
+  <section style="padding-top: 5%;">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="reveal">
+          <ContactForm client:load />
+        </div>
+
+        <div class="contact-aside reveal">
+          <div class="aside-block">
+            <h3>Come funziona</h3>
+            <p>
+              Compili il form, io leggo tutto e ti rispondo con una valutazione.
+              Se c'è fit, ci sentiamo per definire il perimetro. Se non posso
+              aiutarti, te lo dico nessuno perde tempo.
+            </p>
+          </div>
+
+          <div class="aside-block">
+            <h3>Contatto diretto</h3>
+            <ul class="aside-info">
+              <li>
+                <span class="icon">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path
+                      d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                    ></path><polyline points="22,6 12,13 2,6"></polyline></svg
+                  >
+                </span>
+                <a
+                  href="mailto:info@eugeniomiserocchi.it"
+                  style="color:var(--ink)">info@eugeniomiserocchi.it</a
+                >
+              </li>
+              <li>
+                <span class="icon">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path
+                      d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                    ></path><rect x="2" y="9" width="4" height="12"
+                    ></rect><circle cx="4" cy="4" r="2"></circle></svg
+                  >
+                </span>
+                <a
+                  href="https://www.linkedin.com/in/eugeniomiserocchi/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style="color:var(--ink)">LinkedIn</a
+                >
+              </li>
+              <li>
+                <span class="icon">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                    ></path><circle cx="12" cy="10" r="3"></circle></svg
+                  >
+                </span>
+                <span>Rimini, Italia · Lavoro anche da remoto</span>
+              </li>
+            </ul>
+          </div>
+
+          <div
+            class="aside-block"
+            style="background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:24px"
+          >
+            <p style="font-size:14px; color:var(--muted); line-height:1.55">
+              <strong style="color:var(--ink)">Nessuna mailing list.</strong> Nessun
+              auto-responder. Nessun funnel a 47 step. Ti rispondo io, direttamente,
+              perché preferisco una conversazione vera a un'automazione di marketing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

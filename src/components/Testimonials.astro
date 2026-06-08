@@ -1,0 +1,109 @@
+﻿---
+// Testimonials prova sociale
+export interface Testimonial {
+  quote: string;
+  name: string;
+  role?: string;
+  company?: string;
+  rating?: number; // 1-5
+}
+
+export interface Props {
+  heading?: string;
+  subheading?: string;
+  testimonials?: Testimonial[];
+}
+
+const {
+  heading = 'Cosa dicono di noi',
+  subheading = 'Placeholder breve intro alla sezione testimonianze.',
+  testimonials = [
+    {
+      quote: 'Testimonianza placeholder uno. Sostituire con citazione reale del cliente soddisfatto. Testo convincente e specifico.',
+      name: 'Nome Cognome',
+      role: 'Ruolo',
+      company: 'Azienda S.r.l.',
+      rating: 5,
+    },
+    {
+      quote: 'Testimonianza placeholder due. Sostituire con citazione reale del cliente soddisfatto. Risultato concreto ottenuto.',
+      name: 'Nome Cognome',
+      role: 'Ruolo',
+      company: 'Azienda S.r.l.',
+      rating: 5,
+    },
+    {
+      quote: 'Testimonianza placeholder tre. Sostituire con citazione reale del cliente soddisfatto. Esperienza positiva specifica.',
+      name: 'Nome Cognome',
+      role: 'Ruolo',
+      company: 'Azienda S.r.l.',
+      rating: 5,
+    },
+  ],
+} = Astro.props;
+
+const starIcon = `<svg class="w-4 h-4 fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`;
+---
+
+<section id="testimonianze" class="bg-bg-alt section-py" aria-labelledby="testimonials-heading">
+  <div class="container-base">
+
+    <!-- Header sezione -->
+    <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+      <h2
+        id="testimonials-heading"
+        class="text-3xl sm:text-4xl font-bold text-text mb-4"
+        style="font-size: calc(clamp(1.75rem, 4vw, 2.5rem) * var(--display-scale));"
+      >
+        {heading}
+      </h2>
+      <p class="text-lg text-text-muted">{subheading}</p>
+    </div>
+
+    <!-- Griglia testimonianze -->
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list">
+      {testimonials.map((t) => (
+        <li class="bg-bg rounded-xl p-6 border border-border flex flex-col gap-4">
+
+          <!-- Stelle rating -->
+          {t.rating && (
+            <div class="flex gap-1 text-accent" aria-label={`Valutazione: ${t.rating} stelle su 5`}>
+              {Array.from({ length: t.rating }).map(() => (
+                <Fragment set:html={starIcon} />
+              ))}
+            </div>
+          )}
+
+          <!-- Citazione -->
+          <blockquote class="flex-1">
+            <p class="text-text-muted leading-relaxed text-sm italic">"{t.quote}"</p>
+          </blockquote>
+
+          <!-- Autore -->
+          <footer class="flex items-center gap-3 pt-4 border-t border-border">
+            <!-- Avatar placeholder sostituire con <Image> se disponibile foto -->
+            <div
+              class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
+              aria-hidden="true"
+            >
+              <span class="text-primary font-semibold text-sm">
+                {t.name.charAt(0).toUpperCase()}
+              </span>
+            </div>
+            <div>
+              <cite class="not-italic text-sm font-semibold text-text block">{t.name}</cite>
+              {(t.role || t.company) && (
+                <p class="text-xs text-text-muted">
+                  {[t.role, t.company].filter(Boolean).join(' ')}
+                </p>
+              )}
+            </div>
+          </footer>
+
+        </li>
+      ))}
+    </ul>
+
+  </div>
+</section>
+

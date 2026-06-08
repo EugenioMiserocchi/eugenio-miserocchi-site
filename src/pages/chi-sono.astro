@@ -1,0 +1,232 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Picture } from 'astro:assets';
+import aboutImg from '../assets/images/foto-chi-sono.png';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Eugenio Miserocchi',
+  jobTitle: 'Sviluppatore Web & Consulente Automazioni',
+  url: 'https://eugeniomiserocchi.it',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Rimini',
+    addressRegion: 'Emilia-Romagna',
+    addressCountry: 'IT',
+  },
+  knowsAbout: ['Sviluppo Web', 'AI', 'Automazione', 'Next.js', 'Astro', 'React'],
+  sameAs: [
+    'https://www.linkedin.com/in/eugeniomiserocchi/',
+    'https://github.com/eugeniomiserocchi',
+  ],
+};
+---
+
+<BaseLayout
+  title="Chi sono Eugenio Miserocchi | Sviluppatore Web a Rimini"
+  description="Sviluppatore web e consulente automazioni con 5 anni di esperienza. Base a Rimini, lavoro con aziende, professionisti e freelancer in tutta Italia."
+  ogImage="/images/foto-chi-sono.png"
+  schema={schema}
+>
+
+<style>
+  .page-hero{ padding-top:clamp(56px, 8vw, 96px); padding-bottom:clamp(48px, 6vw, 72px) }
+  .page-hero h1{ margin-bottom:24px }
+
+  .quick-facts{
+    display:flex; flex-wrap:wrap; gap:24px 48px;
+    margin-top:32px;
+  }
+  .fact{
+    display:flex; flex-direction:column; gap:4px;
+  }
+  .fact-label{
+    font-family:var(--font-mono); font-size:11px; font-weight:600;
+    color:var(--accent); text-transform:uppercase; letter-spacing:0.08em;
+  }
+  .fact-value{ font-size:15px; color:var(--ink-2) }
+
+  .principles{ background:var(--bg-2) }
+  .principles-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  @media (max-width:880px){ .principles-grid{grid-template-columns:1fr} }
+  .principle{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    padding:32px 28px;
+    box-shadow:var(--shadow-card);
+  }
+  .principle .step-n{ margin-bottom:16px }
+  .principle h3{ margin-bottom:12px }
+  .principle p{ color:var(--muted); font-size:15px; line-height:1.6 }
+
+  .bio-section{ background:var(--bg) }
+  .bio-grid{
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:clamp(32px,5vw,80px); align-items:start;
+  }
+  @media (max-width:880px){ .bio-grid{grid-template-columns:1fr} }
+  .bio-img{
+    position:sticky; top:120px;
+    aspect-ratio:4/5;
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    background:repeating-linear-gradient(135deg, var(--bg-2) 0 14px, var(--surface-2) 14px 28px);
+    border:1px solid var(--line);
+  }
+  .bio-img img{
+    width:100%; height:100%; object-fit:cover;
+  }
+  .bio-text p{ color:var(--ink-2); font-size:16.5px; line-height:1.7; margin-bottom:20px }
+  .bio-text p:first-child{ font-size:18px; color:var(--ink); font-weight:500 }
+
+  .stack-section{ background:var(--bg-2) }
+</style>
+
+<section class="page-hero">
+  <div class="wrap reveal">
+    <div class="eyebrow" style="margin-bottom:24px">
+      <span class="dot"></span>
+      <span>Chi sono</span>
+    </div>
+    <h1>Costruisco prodotti digitali con un solo referente: io.</h1>
+    <p style="color:var(--muted); font-size:clamp(17px, 1.35vw, 19.5px); max-width:62ch; line-height:1.6">
+      Non sono un'agenzia, non gestisco un team remoto di freelancer. Sono uno sviluppatore web e consulente automazioni che lavora direttamente con te, dall'analisi al deploy.
+    </p>
+    <div class="quick-facts">
+      <div class="fact">
+        <span class="fact-label">Base</span>
+        <span class="fact-value">Rimini · Lavoro anche da remoto</span>
+      </div>
+      <div class="fact">
+        <span class="fact-label">Esperienza</span>
+        <span class="fact-value">5 anni</span>
+      </div>
+      <div class="fact">
+        <span class="fact-label">Modello</span>
+        <span class="fact-value">Referente unico</span>
+      </div>
+      <div class="fact">
+        <span class="fact-label">Lingue</span>
+        <span class="fact-value">Italiano · Inglese</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="y2k-divider" aria-hidden="true"><span class="mark"><i></i><i></i><i></i></span></div>
+
+<!-- PRINCIPI -->
+<section class="principles">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><h2>Come lavoro: tre principi non negoziabili.</h2></div>
+      <p>Sono le regole che applico a ogni progetto, indipendentemente dalla dimensione.</p>
+    </div>
+
+    <div class="principles-grid">
+      <article class="principle reveal">
+        <div class="step-n">01</div>
+        <h3>Misurare prima di costruire</h3>
+        <p>Non inizio mai un progetto senza aver capito dove sei adesso e dove vuoi arrivare. I dati vengono prima delle opinioni sempre.</p>
+      </article>
+      <article class="principle reveal">
+        <div class="step-n">02</div>
+        <h3>Un solo interlocutore</h3>
+        <p>Parli con me dall'inizio alla fine. Nessun project manager intermedio, nessun passaggio opaco. Se c'è un problema, lo vediamo insieme.</p>
+      </article>
+      <article class="principle reveal">
+        <div class="step-n">03</div>
+        <h3>Ownership al cliente</h3>
+        <p>Il codice, i dati e gli accessi sono tuoi. Non creo dipendenza: ogni progetto è documentato per essere mantenuto anche senza di me.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BIO -->
+<section class="bio-section">
+  <div class="wrap">
+    <div class="bio-grid">
+      <div class="bio-img reveal">
+        <Picture
+          src={aboutImg}
+          alt="Eugenio Miserocchi, sviluppatore web e consulente automazioni"
+          widths={[360, 520, 720]}
+          sizes="(max-width: 880px) 100vw, 44vw"
+          quality={80}
+          formats={['avif']}
+          fallbackFormat="webp"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="bio-text reveal">
+        <p>Ho iniziato come sviluppatore web full-stack in agenzia, dove ho imparato a gestire progetti end-to-end e a lavorare sotto pressione con scadenze strette.</p>
+        <p>Col tempo ho spostato il focus verso il lato prodotto: non solo scrivere codice, ma capire perché quel codice serve e che risultato deve produrre per il business. Ho iniziato a integrare AI e automazioni nei processi dei clienti quando ho visto quanto tempo si perdeva in operazioni ripetitive che un workflow ben progettato poteva eliminare.</p>
+        <p>Oggi lavoro come consulente indipendente. Sono il punto di contatto unico tra analisi del problema, implementazione tecnica e misurazione dei risultati. Lavoro con PMI, studi professionali, agenzie creative, freelancer e e-commerce principalmente in Italia, da Rimini e da remoto.</p>
+        <p>Il mio approccio è semplice: capire il problema vero, proporre la soluzione più efficace (non la più costosa), costruirla bene e misurare se funziona. Se non funziona, correggo. Se non posso aiutarti, te lo dico subito.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="stack-section">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><h2>Stack tecnologico</h2></div>
+      <p>Gli strumenti che uso quotidianamente. La scelta dipende sempre dal progetto, non dalle mode.</p>
+    </div>
+
+    <div class="reveal">
+      <table class="stack-table">
+        <thead>
+          <tr>
+            <th>Area</th>
+            <th>Tecnologie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Frontend</strong></td>
+            <td>Next.js, Astro, React, TypeScript, Tailwind CSS, Webflow</td>
+          </tr>
+          <tr>
+            <td><strong>Backend</strong></td>
+            <td>Node.js, Postgres, Supabase, Prisma, Redis</td>
+          </tr>
+          <tr>
+            <td><strong>AI &amp; Automazione</strong></td>
+            <td>OpenAI, Anthropic, n8n, Make, LangChain, Vector DB</td>
+          </tr>
+          <tr>
+            <td><strong>Infrastruttura</strong></td>
+            <td>Vercel, Cloudflare, Railway, Docker, Hostinger</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="y2k-divider" aria-hidden="true"><span class="mark"><i></i><i></i><i></i></span></div>
+<section style="background:var(--ink); color:var(--bg); padding-block:var(--section-y)">
+  <div class="wrap" style="text-align:center; max-width:640px">
+    <h2 class="reveal" style="color:var(--bg)">Vuoi capire se posso aiutarti?</h2>
+    <p class="reveal" style="color:color-mix(in oklab, var(--bg) 70%, transparent); margin-top:20px; font-size:17px; line-height:1.6">Raccontami il tuo progetto. Ti rispondo entro 24 ore lavorative con una valutazione onesta.</p>
+    <div class="reveal" style="margin-top:36px">
+      <a class="btn btn-primary" href="/contatti" style="background:var(--bg); color:var(--ink)">
+        Parliamone
+        <svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+

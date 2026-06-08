@@ -1,0 +1,301 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Picture } from 'astro:assets';
+import serviziSitiImg from '../assets/images/servizi-siti.png';
+import servizioAutomazioniImg from '../assets/images/servizio-automazioni.png';
+import servizioSoftwareImg from '../assets/images/servizio-software.png';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'Eugenio Miserocchi',
+    url: 'https://eugeniomiserocchi.it',
+  },
+  areaServed: { '@type': 'Country', name: 'Italia' },
+  serviceType: ['Sviluppo Web', 'Automazione AI', 'Sviluppo Software Custom'],
+};
+---
+
+<BaseLayout
+  title="Servizi Sviluppo Web, Automazioni AI, Build Custom | Eugenio Miserocchi"
+  description="Siti web performanti, automazioni intelligenti e applicazioni su misura. Scopri i tre servizi principali e come posso aiutarti a risolvere problemi concreti."
+  ogImage="/images/servizi-siti.png"
+  schema={schema}
+>
+
+<style>
+  .page-hero{ padding-top:clamp(56px, 8vw, 96px); padding-bottom:clamp(48px, 6vw, 72px) }
+  .page-hero h1{ margin-bottom:24px }
+  .page-hero p{ color:var(--muted); font-size:clamp(17px, 1.35vw, 19.5px); max-width:62ch; line-height:1.6 }
+
+  .svc-full{ padding-block:var(--section-y); border-bottom:1px solid var(--line) }
+  .svc-full:last-of-type{ border-bottom:none }
+  .svc-full:nth-child(even){ background:var(--bg-2) }
+  .svc-layout{
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:clamp(32px,5vw,80px); align-items:start;
+  }
+  .svc-full:nth-child(even) .svc-layout{ direction:rtl }
+  .svc-full:nth-child(even) .svc-layout > *{ direction:ltr }
+
+  .svc-sticky{
+    position:sticky; top:120px;
+    aspect-ratio:4/5;
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .svc-sticky img{
+    width:100%; height:100%; object-fit:cover;
+  }
+  @media (max-width: 880px){
+    .svc-layout{ grid-template-columns:1fr }
+    .svc-full:nth-child(even) .svc-layout{ direction:ltr }
+    .svc-sticky{ position:relative; top:auto; aspect-ratio:4/3 }
+  }
+
+  .svc-content h2{ margin-bottom:24px }
+  .svc-content > p{ color:var(--muted); font-size:16px; line-height:1.65; margin-bottom:16px }
+
+  .deliverables{ margin-top:36px }
+  .deliverables h3{ font-size:18px; margin-bottom:18px; color:var(--ink) }
+  .del-list{ list-style:none; padding:0; margin:0 0 32px; display:flex; flex-direction:column; gap:12px }
+  .del-list li{
+    display:flex; align-items:baseline; gap:12px;
+    color:var(--ink-2); font-size:15px; line-height:1.5;
+  }
+  .del-list li::before{
+    content:''; flex:0 0 8px; width:8px; height:8px;
+    background:var(--accent); border-radius:50%;
+    transform:translateY(4px);
+  }
+
+  .svc-meta{
+    display:flex; gap:32px; flex-wrap:wrap;
+    margin-top:32px; padding-top:24px;
+    border-top:1px solid var(--line);
+  }
+  .svc-meta-item{ display:flex; flex-direction:column; gap:4px }
+  .svc-meta-label{
+    font-family:var(--font-mono); font-size:11px; font-weight:600;
+    color:var(--accent); text-transform:uppercase; letter-spacing:0.08em;
+  }
+  .svc-meta-value{ font-size:14px; color:var(--ink-2) }
+
+  .faq{ background:var(--bg-2) }
+  .faq-list{ max-width:720px }
+  .faq-item{ border-bottom:1px solid var(--line); padding:28px 0 }
+  .faq-item:first-child{ border-top:1px solid var(--line) }
+  .faq-q{
+    font-family:var(--font-display); font-weight:700;
+    font-size:calc(clamp(18px, 1.4vw, 22px) * var(--display-scale)); color:var(--ink);
+    margin-bottom:12px;
+  }
+  .faq-a{ color:var(--muted); font-size:15.5px; line-height:1.6 }
+</style>
+
+<section class="page-hero">
+  <div class="wrap reveal">
+    <div class="eyebrow" style="margin-bottom:24px">
+      <span class="dot"></span>
+      <span>Servizi</span>
+    </div>
+    <h1>Tre aree, una logica unica: misurare prima, costruire dopo.</h1>
+    <p>Ogni progetto parte da un problema reale. Non lavoro con pacchetti predefiniti: analizzo il tuo contesto, propongo la soluzione più efficace e la costruisco con te.</p>
+  </div>
+</section>
+
+<div class="y2k-divider" aria-hidden="true"><span class="mark"><i></i><i></i><i></i></span></div>
+
+<!-- SERVIZIO 1: Siti Web -->
+<div class="svc-full">
+  <div class="wrap">
+    <div class="svc-layout reveal">
+      <div class="svc-sticky">
+        <Picture
+          src={serviziSitiImg}
+          alt="Sviluppo siti web performanti e landing page"
+          widths={[360, 520, 720, 920]}
+          sizes="(max-width: 880px) 100vw, 50vw"
+          quality={90}
+          formats={['avif']}
+          fallbackFormat="webp"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="svc-content">
+        <div class="step-n" style="margin-bottom:16px">01 / Siti web &amp; landing page</div>
+        <h2>Siti veloci che convertono, non vetrine statiche.</h2>
+        <p>Progetto e sviluppo siti web ad alte prestazioni con un obiettivo chiaro: portarti risultati misurabili. Ogni sito parte da un audit delle metriche esistenti e arriva a un prodotto ottimizzato per Core Web Vitals, SEO e conversione.</p>
+        <p>Non uso template riadattati. Ogni architettura è pensata sul tuo caso specifico che tu sia un freelancer che ha bisogno di una landing efficace o un'azienda che vuole un sistema di acquisizione strutturato.</p>
+
+        <div class="deliverables">
+          <h3>Cosa include</h3>
+          <ul class="del-list">
+            <li>Audit Core Web Vitals e analisi della situazione attuale</li>
+            <li>Architettura informativa e struttura copy</li>
+            <li>Sviluppo custom su stack moderno (Astro, Next.js, Webflow)</li>
+            <li>Integrazioni CRM, analytics e tracking conversioni</li>
+            <li>Ottimizzazione SEO tecnica on-page</li>
+            <li>Misurazione post-deploy e report performance</li>
+          </ul>
+        </div>
+
+        <div class="svc-meta">
+          <div class="svc-meta-item">
+            <span class="svc-meta-label">Timeline</span>
+            <span class="svc-meta-value">3–6 settimane</span>
+          </div>
+          <div class="svc-meta-item">
+            <span class="svc-meta-label">Stack</span>
+            <span class="svc-meta-value">Astro · Next.js · Webflow · Tailwind</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVIZIO 2: Automazioni -->
+<div class="svc-full">
+  <div class="wrap">
+    <div class="svc-layout reveal">
+      <div class="svc-sticky">
+        <Picture
+          src={servizioAutomazioniImg}
+          alt="Automazioni AI e workflow intelligenti"
+          widths={[360, 520, 720, 920]}
+          sizes="(max-width: 880px) 100vw, 50vw"
+          quality={90}
+          formats={['avif']}
+          fallbackFormat="webp"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="svc-content">
+        <div class="step-n" style="margin-bottom:16px">02 / Automazioni &amp; AI workflows</div>
+        <h2>Meno lavoro manuale, più tempo per ciò che conta.</h2>
+        <p>Mappo i tuoi processi ripetitivi e li automatizzo con strumenti come n8n, Make e AI (OpenAI, Anthropic). L'obiettivo non è "usare l'AI per il gusto di farlo", ma eliminare colli di bottiglia concreti che oggi ti rallentano.</p>
+        <p>Funziona per qualsiasi dimensione: dal freelancer che vuole automatizzare la gestione lead all'azienda che ha bisogno di orchestrare dati tra più piattaforme.</p>
+
+        <div class="deliverables">
+          <h3>Cosa include</h3>
+          <ul class="del-list">
+            <li>Mappatura processi e identificazione colli di bottiglia</li>
+            <li>Design del workflow e scelta degli strumenti</li>
+            <li>Implementazione con n8n, Make o soluzioni custom</li>
+            <li>Integrazione con i tuoi strumenti esistenti (CRM, email, Slack)</li>
+            <li>Monitoraggio e osservabilità delle automazioni</li>
+            <li>Documentazione per il tuo team</li>
+          </ul>
+        </div>
+
+        <div class="svc-meta">
+          <div class="svc-meta-item">
+            <span class="svc-meta-label">Timeline</span>
+            <span class="svc-meta-value">2–8 settimane</span>
+          </div>
+          <div class="svc-meta-item">
+            <span class="svc-meta-label">Stack</span>
+            <span class="svc-meta-value">n8n · Make · OpenAI · Anthropic · Custom</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVIZIO 3: Build Custom -->
+<div class="svc-full">
+  <div class="wrap">
+    <div class="svc-layout reveal">
+      <div class="svc-sticky">
+        <Picture
+          src={servizioSoftwareImg}
+          alt="Sviluppo software su misura e dashboard custom"
+          widths={[360, 520, 720, 920]}
+          sizes="(max-width: 880px) 100vw, 50vw"
+          quality={90}
+          formats={['avif']}
+          fallbackFormat="webp"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="svc-content">
+        <div class="step-n" style="margin-bottom:16px">03 / Build digitali su misura</div>
+        <h2>Software costruito intorno al tuo processo, non il contrario.</h2>
+        <p>Quando i SaaS generici non bastano più, progetto e sviluppo applicazioni su misura: dashboard interne, tool operativi, piattaforme di gestione. Tutto parte da una discovery approfondita per capire cosa ti serve davvero.</p>
+        <p>Lavoro con stack solidi e mantenibili nel tempo, con autenticazione, ruoli e integrazioni con i tuoi sistemi.</p>
+
+        <div class="deliverables">
+          <h3>Cosa include</h3>
+          <ul class="del-list">
+            <li>Discovery operativa e definizione requisiti</li>
+            <li>Prototipo cliccabile per validazione</li>
+            <li>Sviluppo full-stack con auth, ruoli e permessi</li>
+            <li>Integrazioni API con i tuoi sistemi</li>
+            <li>Deploy, monitoraggio e supporto post-lancio</li>
+          </ul>
+        </div>
+
+        <div class="svc-meta">
+          <div class="svc-meta-item">
+            <span class="svc-meta-label">Timeline</span>
+            <span class="svc-meta-value">4–12 settimane</span>
+          </div>
+          <div class="svc-meta-item">
+            <span class="svc-meta-label">Stack</span>
+            <span class="svc-meta-value">Next.js · Supabase · Postgres · React</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><h2>Domande frequenti</h2></div>
+      <p>Le risposte alle domande che ricevo più spesso prima di iniziare un progetto.</p>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q">Come capiamo se c'è fit prima di partire?</div>
+        <p class="faq-a">Il primo contatto è gratuito e serve esattamente a questo. Ti chiedo obiettivo, contesto e budget indicativo. Se posso aiutarti, ti mando una proposta concreta. Se non sono la persona giusta, te lo dico subito preferisco la trasparenza a un progetto forzato.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Lavori solo su progetti completi?</div>
+        <p class="faq-a">No. Posso intervenire anche su progetti esistenti: ottimizzazione di un sito lento, integrazione di automazioni in un flusso già attivo, o sviluppo di una feature specifica per un'app che usi già. Il perimetro lo definiamo insieme.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Serve avere già tutto definito internamente?</div>
+        <p class="faq-a">No, anzi. Se hai un obiettivo chiaro ma non sai come arrivarci tecnicamente, quello è proprio il mio lavoro. Ti aiuto a tradurre un bisogno di business in un piano d'azione concreto, con priorità, tempi e costi definiti.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="y2k-divider" aria-hidden="true"><span class="mark"><i></i><i></i><i></i></span></div>
+<section style="background:var(--ink); color:var(--bg); padding-block:var(--section-y)">
+  <div class="wrap" style="text-align:center; max-width:640px">
+    <h2 class="reveal" style="color:var(--bg)">Hai un progetto? Parliamone.</h2>
+    <p class="reveal" style="color:color-mix(in oklab, var(--bg) 70%, transparent); margin-top:20px; font-size:17px; line-height:1.6">Raccontami obiettivo, contesto e budget indicativo. Ti rispondo entro 24 ore lavorative con una valutazione concreta.</p>
+    <div class="reveal" style="margin-top:36px">
+      <a class="btn btn-primary" href="/contatti" style="background:var(--bg); color:var(--ink)">
+        Compila il form
+        <svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+

@@ -1,0 +1,99 @@
+﻿---
+// Services griglia servizi/offerta
+export interface Service {
+  title: string;
+  description: string;
+  icon?: string; // SVG inline string VIETATO icon-font
+  href?: string;
+}
+
+export interface Props {
+  heading?: string;
+  subheading?: string;
+  services?: Service[];
+}
+
+const {
+  heading = 'I nostri servizi',
+  subheading = 'Placeholder descrizione introduttiva della sezione servizi.',
+  services = [
+    {
+      title: 'Servizio Uno',
+      description: 'Descrizione placeholder del primo servizio. Sostituire con copy reale.',
+    },
+    {
+      title: 'Servizio Due',
+      description: 'Descrizione placeholder del secondo servizio. Sostituire con copy reale.',
+    },
+    {
+      title: 'Servizio Tre',
+      description: 'Descrizione placeholder del terzo servizio. Sostituire con copy reale.',
+    },
+    {
+      title: 'Servizio Quattro',
+      description: 'Descrizione placeholder del quarto servizio. Sostituire con copy reale.',
+    },
+    {
+      title: 'Servizio Cinque',
+      description: 'Descrizione placeholder del quinto servizio. Sostituire con copy reale.',
+    },
+    {
+      title: 'Servizio Sei',
+      description: 'Descrizione placeholder del sesto servizio. Sostituire con copy reale.',
+    },
+  ],
+} = Astro.props;
+---
+
+<section id="servizi" class="bg-bg-alt section-py" aria-labelledby="services-heading">
+  <div class="container-base">
+
+    <!-- Header sezione -->
+    <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+      <h2
+        id="services-heading"
+        class="text-3xl sm:text-4xl font-bold text-text mb-4"
+        style="font-size: calc(clamp(1.75rem, 4vw, 2.5rem) * var(--display-scale));"
+      >
+        {heading}
+      </h2>
+      <p class="text-lg text-text-muted leading-relaxed">
+        {subheading}
+      </p>
+    </div>
+
+    <!-- Griglia servizi -->
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" role="list">
+      {services.map((service) => (
+        <li class="bg-bg rounded-xl p-6 border border-border hover:border-primary/30 hover:shadow-md transition-all duration-200">
+          <!-- Icon placeholder sostituire con SVG inline specifico per servizio -->
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4" aria-hidden="true">
+            {service.icon ? (
+              <Fragment set:html={service.icon} />
+            ) : (
+              <div class="w-6 h-6 bg-primary/30 rounded"></div>
+            )}
+          </div>
+
+          <h3 class="text-lg font-semibold text-text mb-2">{service.title}</h3>
+          <p class="text-text-muted text-sm leading-relaxed">{service.description}</p>
+
+          {service.href && (
+            <a
+              href={service.href}
+              class="inline-flex items-center gap-1 mt-4 text-sm font-medium text-primary hover:text-primary-light transition-colors"
+              aria-label={`Scopri di più su ${service.title}`}
+            >
+              Scopri di più
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          )}
+        </li>
+      ))}
+    </ul>
+
+  </div>
+</section>
+

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://eugeniomiserocchi.it/sitemap-index.xml

@@ -1,0 +1,59 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  publishedDate?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = '/og-image.jpg',
+  type = 'website',
+  publishedDate,
+  schema,
+} = Astro.props;
+
+const siteUrl = 'https://eugeniomiserocchi.it';
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).toString();
+const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+<meta name="robots" content="index, follow" />
+<meta name="language" content="it" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={fullOgImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="it_IT" />
+<meta property="og:site_name" content="Eugenio Miserocchi" />
+{publishedDate && <meta property="article:published_time" content={publishedDate} />}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={fullOgImage} />
+
+<meta name="geo.region" content="IT-RN" />
+<meta name="geo.placename" content="Rimini" />
+
+<link rel="preconnect" href="/" />
+
+{schema && (
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}

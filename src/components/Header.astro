@@ -1,0 +1,163 @@
+﻿---
+const currentPath = Astro.url.pathname;
+
+const nav = [
+  { label: 'Servizi', href: '/servizi' },
+  { label: 'Chi sono', href: '/chi-sono' },
+  { label: 'Casi', href: '/casi-studio' },
+  { label: 'Insights', href: '/insights' },
+];
+
+function isActive(href: string) {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+
+<div class="scroll-progress" aria-hidden="true"><span id="scroll-bar"></span></div>
+
+<header class="nav">
+  <div class="nav-inner wrap">
+    <a href="/" class="brand" aria-label="Eugenio Miserocchi Homepage">
+      <div class="brand-mark" aria-hidden="true"></div>
+      <span class="brand-name">
+        <span>Eugenio</span>
+        <span>Miserocchi</span>
+      </span>
+    </a>
+
+    <nav class="nav-links" aria-label="Navigazione principale">
+      {nav.map(item => (
+        <a href={item.href} class={isActive(item.href) ? 'current' : ''}>
+          {item.label}
+        </a>
+      ))}
+
+      <a href="/contatti" class="nav-cta">
+        Contattami
+      </a>
+
+      <button
+        class="hamburger"
+        type="button"
+        id="hamburger-btn"
+        aria-label="Apri menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<div class="mobile-menu-backdrop" id="mobile-menu-backdrop" hidden></div>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Menu navigazione" aria-hidden="true">
+  <div class="mobile-menu-links">
+    {nav.map(item => (
+      <a href={item.href}>{item.label}</a>
+    ))}
+  </div>
+  <a href="/contatti" class="btn btn-primary">
+    Contattami
+  </a>
+  <div class="mobile-socials" aria-label="Social">
+    <a href="https://www.instagram.com/eugenio.miserocchi/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg viewBox="0 0 448 512" aria-hidden="true">
+        <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1S1.7 127.6 0 163.5c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2s34.4-58 36.2-93.9c2.1-37 2.1-147.8 0-184.9zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
+      </svg>
+    </a>
+    <a href="https://www.linkedin.com/in/eugenio-miserocchi/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+      <svg viewBox="0 0 448 512" aria-hidden="true">
+        <path d="M100.3 448H7.4V148.9h92.9V448zM53.8 108.1C24.1 108.1 0 83.5 0 53.8S24.1 0 53.8 0s53.8 24.1 53.8 53.8-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"></path>
+      </svg>
+    </a>
+    <a href="mailto:info@eugeniomiserocchi.it" aria-label="Email">
+      <svg viewBox="0 0 512 512" aria-hidden="true">
+        <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"></path>
+      </svg>
+    </a>
+    <a href="tel:+393317505258" aria-label="Telefono">
+      <svg viewBox="0 0 512 512" aria-hidden="true">
+        <path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"></path>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<script is:inline>
+(function(){
+  const KEY = 'em-site-prefs/v1';
+  let prefs;
+  try { prefs = JSON.parse(localStorage.getItem(KEY)) || {}; } catch { prefs = {}; }
+
+  const d = document.documentElement;
+  if (prefs.mode) d.setAttribute('data-theme', prefs.mode);
+  if (prefs.accent) d.setAttribute('data-accent', prefs.accent);
+  if (prefs.display) d.setAttribute('data-display', prefs.display);
+
+  function save(p) {
+    Object.assign(prefs, p);
+    localStorage.setItem(KEY, JSON.stringify(prefs));
+    if (p.mode) d.setAttribute('data-theme', p.mode);
+    if (p.accent) d.setAttribute('data-accent', p.accent);
+    if (p.display) d.setAttribute('data-display', p.display);
+    window.dispatchEvent(new CustomEvent('em:prefs', { detail: prefs }));
+  }
+
+  window.EM = { prefs, save, setPrefs: save };
+
+  const hamburger = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileBackdrop = document.getElementById('mobile-menu-backdrop');
+
+  function setMobileMenu(open) {
+    mobileMenu?.classList.toggle('open', open);
+    mobileBackdrop?.classList.toggle('open', open);
+    hamburger?.classList.toggle('is-open', open);
+    hamburger?.setAttribute('aria-expanded', String(open));
+    hamburger?.setAttribute('aria-label', open ? 'Chiudi menu' : 'Apri menu');
+    mobileMenu?.setAttribute('aria-hidden', String(!open));
+    if (mobileBackdrop) mobileBackdrop.hidden = !open;
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  hamburger?.addEventListener('click', function() {
+    setMobileMenu(!mobileMenu?.classList.contains('open'));
+  });
+  mobileBackdrop?.addEventListener('click', function() {
+    setMobileMenu(false);
+  });
+  mobileMenu?.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      setMobileMenu(false);
+    });
+  });
+  window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') setMobileMenu(false);
+  });
+
+  window.addEventListener('scroll', function() {
+    const bar = document.getElementById('scroll-bar');
+    if (!bar) return;
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
+  });
+
+  window.addEventListener('storage', function(e) {
+    if (e.key !== KEY) return;
+    try {
+      const p = JSON.parse(e.newValue) || {};
+      if (p.mode) d.setAttribute('data-theme', p.mode);
+      if (p.accent) d.setAttribute('data-accent', p.accent);
+      if (p.display) d.setAttribute('data-display', p.display);
+      Object.assign(prefs, p);
+    } catch {}
+  });
+
+})();
+</script>
+

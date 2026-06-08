@@ -1,0 +1,96 @@
+﻿---
+// About chi siamo / approccio / valori
+// TODO: importare immagine con <Image>:
+// import { Image } from 'astro:assets';
+// import aboutImg from '@/assets/about.jpg';
+
+export interface Stat {
+  value: string;
+  label: string;
+}
+
+export interface Props {
+  heading?: string;
+  body?: string[];
+  stats?: Stat[];
+  ctaLabel?: string;
+  ctaHref?: string;
+  imageAlt?: string;
+}
+
+const {
+  heading = 'Chi siamo',
+  body = [
+    'Paragrafo uno placeholder. Sostituire con copy che racconta la storia o l\'approccio dell\'azienda.',
+    'Paragrafo due placeholder. Punti di forza, valori, missione del cliente.',
+  ],
+  stats = [
+    { value: '10+', label: 'Anni di esperienza' },
+    { value: '200+', label: 'Clienti soddisfatti' },
+    { value: '500+', label: 'Progetti completati' },
+  ],
+  ctaLabel = 'Contattaci',
+  ctaHref = '#contatti',
+  imageAlt = 'Il team al lavoro placeholder',
+} = Astro.props;
+---
+
+<section id="chi-siamo" class="bg-bg section-py" aria-labelledby="about-heading">
+  <div class="container-base">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+      <!-- Immagine placeholder sostituire con <Image src={aboutImg} alt={imageAlt} /> -->
+      <div class="order-2 lg:order-1">
+        <div
+          class="aspect-[4/3] rounded-2xl bg-bg-alt border border-border flex items-center justify-center"
+          aria-hidden="true"
+        >
+          <div class="text-center text-text-muted">
+            <svg class="w-16 h-16 mx-auto mb-3 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <p class="text-sm">{imageAlt}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testo -->
+      <div class="order-1 lg:order-2 space-y-6">
+        <h2
+          id="about-heading"
+          class="text-3xl sm:text-4xl font-bold text-text"
+          style="font-size: calc(clamp(1.75rem, 4vw, 2.5rem) * var(--display-scale));"
+        >
+          {heading}
+        </h2>
+
+        <div class="space-y-4">
+          {body.map((paragraph) => (
+            <p class="text-text-muted leading-relaxed">{paragraph}</p>
+          ))}
+        </div>
+
+        <!-- Stats -->
+        {stats.length > 0 && (
+          <dl class="grid grid-cols-3 gap-4 pt-4 border-t border-border">
+            {stats.map((stat) => (
+              <div class="text-center sm:text-left">
+                <dt class="text-2xl font-bold text-primary">{stat.value}</dt>
+                <dd class="text-xs text-text-muted mt-1 leading-tight">{stat.label}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+
+        <a
+          href={ctaHref}
+          class="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-light transition-colors duration-200 min-h-[44px]"
+        >
+          {ctaLabel}
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+

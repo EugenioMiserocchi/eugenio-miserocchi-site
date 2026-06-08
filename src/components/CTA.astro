@@ -1,0 +1,78 @@
+﻿---
+// CTA call to action section
+export interface Props {
+  heading?: string;
+  body?: string;
+  ctaPrimaryLabel?: string;
+  ctaPrimaryHref?: string;
+  ctaSecondaryLabel?: string;
+  ctaSecondaryHref?: string;
+  variant?: 'primary' | 'accent' | 'light';
+}
+
+const {
+  heading = 'Inizia oggi placeholder headline CTA',
+  body = 'Testo motivazionale placeholder. Sostituire con copy che spingi il visitatore all\'azione.',
+  ctaPrimaryLabel = 'Contattaci ora',
+  ctaPrimaryHref = '#contatti',
+  ctaSecondaryLabel = 'Scopri i servizi',
+  ctaSecondaryHref = '#servizi',
+  variant = 'primary',
+} = Astro.props;
+
+const bgClass = {
+  primary: 'bg-primary text-white',
+  accent: 'bg-accent text-white',
+  light: 'bg-bg-alt text-text',
+}[variant];
+
+const ctaClass = {
+  primary: 'bg-white text-primary hover:bg-white/90',
+  accent: 'bg-white text-accent hover:bg-white/90',
+  light: 'bg-primary text-white hover:bg-primary-light',
+}[variant];
+
+const ctaSecondaryClass = {
+  primary: 'border-white/40 text-white hover:border-white hover:bg-white/10',
+  accent: 'border-white/40 text-white hover:border-white hover:bg-white/10',
+  light: 'border-border text-text hover:border-primary hover:text-primary',
+}[variant];
+---
+
+<section class={`${bgClass} section-py`} aria-labelledby="cta-heading">
+  <div class="container-base">
+    <div class="max-w-3xl mx-auto text-center space-y-6">
+
+      <h2
+        id="cta-heading"
+        class="text-3xl sm:text-4xl font-bold"
+        style="font-size: calc(clamp(1.75rem, 4vw, 2.5rem) * var(--display-scale));"
+      >
+        {heading}
+      </h2>
+
+      <p class={`text-lg leading-relaxed ${variant !== 'light' ? 'text-white/80' : 'text-text-muted'}`}>
+        {body}
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center pt-2">
+        <a
+          href={ctaPrimaryHref}
+          class={`inline-flex items-center justify-center px-8 py-4 font-semibold rounded-lg transition-colors duration-200 text-base min-h-[44px] ${ctaClass}`}
+        >
+          {ctaPrimaryLabel}
+        </a>
+        {ctaSecondaryLabel && (
+          <a
+            href={ctaSecondaryHref}
+            class={`inline-flex items-center justify-center px-8 py-4 border-2 font-semibold rounded-lg transition-colors duration-200 text-base min-h-[44px] ${ctaSecondaryClass}`}
+          >
+            {ctaSecondaryLabel}
+          </a>
+        )}
+      </div>
+
+    </div>
+  </div>
+</section>
+

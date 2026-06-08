@@ -1,0 +1,110 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allInsights = await getCollection('insights');
+const insights = allInsights.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const categories = [...new Set(insights.map(i => i.data.category))];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Insights Eugenio Miserocchi',
+  description: 'Articoli su sviluppo web, SEO tecnica, automazioni e AI applicata al business. Niente teoria astratta: solo cose che uso nei progetti reali.',
+  url: 'https://eugeniomiserocchi.it/insights',
+};
+---
+
+<BaseLayout
+  title="Insights Sviluppo Web, AI e Automazioni | Eugenio Miserocchi"
+  description="Articoli su sviluppo web, SEO tecnica, automazioni e AI applicata al business. Niente teoria astratta: solo cose che uso nei progetti reali."
+  schema={schema}
+>
+
+<style>
+  .page-hero{ padding-top:clamp(56px, 8vw, 96px); padding-bottom:clamp(48px, 6vw, 72px) }
+</style>
+
+<section class="page-hero">
+  <div class="wrap reveal">
+    <div class="eyebrow" style="margin-bottom:24px">
+      <span class="dot"></span>
+      <span>Insights</span>
+    </div>
+    <h1>Quello che imparo, lo condivido.</h1>
+    <p style="color:var(--muted); font-size:clamp(17px, 1.35vw, 19.5px); max-width:62ch; line-height:1.6">
+      Articoli su sviluppo web, automazioni e AI applicata. Niente teoria astratta: solo cose che uso nei progetti reali, spiegate in modo diretto.
+    </p>
+  </div>
+</section>
+
+<div class="y2k-divider" aria-hidden="true"><span class="mark"><i></i><i></i><i></i></span></div>
+
+<section style="padding-block:var(--section-y)">
+  <div class="wrap">
+    <div class="cat-filters reveal" id="cat-filters">
+      <button class="cat-filter active" data-cat="all">Tutti</button>
+      {categories.map(cat => (
+        <button class="cat-filter" data-cat={cat}>{cat}</button>
+      ))}
+    </div>
+
+    <div id="insights-list">
+      {insights.map(insight => (
+        <a href={`/insights/${insight.slug}`} class="insight-card reveal" data-category={insight.data.category}>
+          <div class="insight-meta">
+            <span class="insight-tag">{insight.data.category}</span>
+            <span>{insight.data.date}</span>
+            <span>{insight.data.readTime}</span>
+          </div>
+          <h3 style="margin-bottom:8px">{insight.data.title}</h3>
+          <p style="color:var(--muted); font-size:15.5px; line-height:1.6; max-width:72ch">{insight.data.description}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="y2k-divider" aria-hidden="true"><span class="mark"><i></i><i></i><i></i></span></div>
+<section style="background:var(--ink); color:var(--bg); padding-block:var(--section-y)">
+  <div class="wrap" style="text-align:center; max-width:640px">
+    <h2 class="reveal" style="color:var(--bg)">Hai un progetto in mente?</h2>
+    <p class="reveal" style="color:color-mix(in oklab, var(--bg) 70%, transparent); margin-top:20px; font-size:17px; line-height:1.6">Raccontami cosa vuoi ottenere. Ti rispondo entro 24 ore lavorative.</p>
+    <div class="reveal" style="margin-top:36px">
+      <a class="btn btn-primary" href="/contatti" style="background:var(--bg); color:var(--ink)">
+        Parliamone
+        <svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+(function(){
+  const filters = document.getElementById('cat-filters');
+  const cards = document.querySelectorAll('.insight-card');
+  if (!filters) return;
+
+  filters.addEventListener('click', function(e) {
+    const btn = e.target.closest('.cat-filter');
+    if (!btn) return;
+    const cat = btn.dataset.cat;
+
+    filters.querySelectorAll('.cat-filter').forEach(function(b) { b.classList.remove('active') });
+    btn.classList.add('active');
+
+    cards.forEach(function(card) {
+      if (cat === 'all' || card.dataset.category === cat) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+})();
+</script>
+
+</BaseLayout>
+
