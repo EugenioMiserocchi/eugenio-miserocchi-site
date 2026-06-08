@@ -38,5 +38,6 @@ jobs:
           port: 21
           local-dir: ./dist/
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          dangerous-clean-slate: true # PULIZIA UNA TANTUM: svuota public_html e ricarica dist/ da zero
           # Sincronizza solo le differenze: usa un manifest .ftp-deploy-sync-state.json
           # sul server per caricare solo i file cambiati ad ogni deploy.
