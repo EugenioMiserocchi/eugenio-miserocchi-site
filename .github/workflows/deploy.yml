@@ -38,6 +38,9 @@ jobs:
           port: 21
           local-dir: ./dist/
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          # Hostinger chiude la control socket se resta idle durante la scansione:
+          # alziamo il timeout a 2 min per evitare "Timeout (control socket)".
+          timeout: 120000
           # Sync incrementale: carica solo i file cambiati e rimuove dal server
           # quelli eliminati da dist/, mantenendo public_html identico al build.
           # Sincronizza solo le differenze: usa un manifest .ftp-deploy-sync-state.json
