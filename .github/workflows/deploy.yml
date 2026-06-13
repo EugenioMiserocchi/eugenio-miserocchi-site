@@ -41,10 +41,6 @@ jobs:
           # Hostinger chiude la control socket se resta idle durante la scansione:
           # alziamo il timeout a 2 min per evitare "Timeout (control socket)".
           timeout: 120000
-          # PULIZIA UNA-TANTUM: la docroot conteneva file vecchi + una cartella
-          # public_html/ annidata (deploy finiti nel percorso sbagliato). Azzeriamo
-          # tutto e ricarichiamo pulito. RIMUOVERE dopo il primo deploy riuscito.
-          dangerous-clean-slate: true
           # Sync incrementale: carica solo i file cambiati e rimuove dal server
           # quelli eliminati da dist/, mantenendo public_html identico al build.
           # Sincronizza solo le differenze: usa un manifest .ftp-deploy-sync-state.json
