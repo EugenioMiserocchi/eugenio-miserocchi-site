@@ -4,8 +4,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const ultimoAggiornamento = '13 giugno 2026';
 
 // L'elenco puntuale dei cookie viene generato automaticamente da Cookiebot
-// (CookieDeclaration) usando il CBID. In assenza dell'ID mostriamo un avviso.
-const CBID = import.meta.env.PUBLIC_COOKIEBOT_CBID;
+// (CookieDeclaration) usando il CBID — ID pubblico lato client. Si può
+// sovrascrivere via env, ma per default usiamo quello del dominio in produzione.
+const CBID = import.meta.env.PUBLIC_COOKIEBOT_CBID ?? '04dddb6e-bc51-4984-804a-7eb3409ec76b';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -113,20 +114,13 @@ const schema = {
         e mantenuto automaticamente:
       </p>
 
-      {CBID ? (
-        <script
-          id="CookieDeclaration"
-          src={`https://consent.cookiebot.com/${CBID}/cd.js`}
-          type="text/javascript"
-          async
-          is:inline
-        />
-      ) : (
-        <div class="note">
-          La dichiarazione dei cookie sarà visibile qui una volta configurato l'ID Cookiebot
-          (<code>PUBLIC_COOKIEBOT_CBID</code>) e pubblicato il sito.
-        </div>
-      )}
+      <script
+        id="CookieDeclaration"
+        src={`https://consent.cookiebot.com/${CBID}/cd.js`}
+        type="text/javascript"
+        async
+        is:inline
+      />
     </div>
   </section>
 </BaseLayout>

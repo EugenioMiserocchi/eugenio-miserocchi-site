@@ -9,7 +9,6 @@ const year = new Date().getFullYear();
         <a href="/" class="brand" aria-label="Homepage">
           <div class="brand-mark brand-mark--sm" aria-hidden="true"></div>
         </a>
-        <span>&copy; {year} Eugenio Miserocchi &mdash; P.IVA 04699740405</span>
         <span class="foot-legal">
           <a href="/privacy">Privacy</a>
           <span aria-hidden="true">&middot;</span>
@@ -35,6 +34,9 @@ const year = new Date().getFullYear();
         </span>
       </div>
     </div>
+    <div class="foot-base">
+      <span>&copy; {year} Eugenio Miserocchi &mdash; P.IVA 04699740405</span>
+    </div>
   </div>
 </footer>
 
@@ -43,7 +45,6 @@ const year = new Date().getFullYear();
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-left: 14px;
   }
   .foot-legal a {
     color: var(--muted);
@@ -51,7 +52,12 @@ const year = new Date().getFullYear();
     transition: color 0.2s ease;
   }
   .foot-legal a:hover { color: var(--ink); text-decoration: underline; }
-  @media (max-width: 560px) {
-    .foot-legal { display: flex; margin: 8px 0 0; }
+  .foot-base {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted-2);
   }
 </style>
