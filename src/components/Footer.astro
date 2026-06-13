@@ -10,6 +10,11 @@ const year = new Date().getFullYear();
           <div class="brand-mark brand-mark--sm" aria-hidden="true"></div>
         </a>
         <span>&copy; {year} Eugenio Miserocchi &mdash; P.IVA 04699740405</span>
+        <span class="foot-legal">
+          <a href="/privacy">Privacy</a>
+          <span aria-hidden="true">&middot;</span>
+          <a href="/cookie">Cookie</a>
+        </span>
       </div>
       <div class="foot-r">
         <a href="https://www.instagram.com/eugenio.miserocchi/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -32,3 +37,21 @@ const year = new Date().getFullYear();
     </div>
   </div>
 </footer>
+
+<style>
+  .foot-legal {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 14px;
+  }
+  .foot-legal a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .foot-legal a:hover { color: var(--ink); text-decoration: underline; }
+  @media (max-width: 560px) {
+    .foot-legal { display: flex; margin: 8px 0 0; }
+  }
+</style>

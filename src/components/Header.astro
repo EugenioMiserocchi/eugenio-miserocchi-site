@@ -96,15 +96,11 @@ function isActive(href: string) {
 
   const d = document.documentElement;
   if (prefs.mode) d.setAttribute('data-theme', prefs.mode);
-  if (prefs.accent) d.setAttribute('data-accent', prefs.accent);
-  if (prefs.display) d.setAttribute('data-display', prefs.display);
 
   function save(p) {
     Object.assign(prefs, p);
     localStorage.setItem(KEY, JSON.stringify(prefs));
     if (p.mode) d.setAttribute('data-theme', p.mode);
-    if (p.accent) d.setAttribute('data-accent', p.accent);
-    if (p.display) d.setAttribute('data-display', p.display);
     window.dispatchEvent(new CustomEvent('em:prefs', { detail: prefs }));
   }
 
@@ -152,8 +148,6 @@ function isActive(href: string) {
     try {
       const p = JSON.parse(e.newValue) || {};
       if (p.mode) d.setAttribute('data-theme', p.mode);
-      if (p.accent) d.setAttribute('data-accent', p.accent);
-      if (p.display) d.setAttribute('data-display', p.display);
       Object.assign(prefs, p);
     } catch {}
   });

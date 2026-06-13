@@ -14,6 +14,14 @@ export default function ContactForm() {
     setErrorMsg('');
 
     const form = e.currentTarget;
+
+    const privacyOk = (form.elements.namedItem('privacy') as HTMLInputElement).checked;
+    if (!privacyOk) {
+      setErrorMsg('Per inviare la richiesta devi accettare la Privacy Policy.');
+      setStatus('error');
+      return;
+    }
+
     const data = {
       nome: (form.elements.namedItem('nome') as HTMLInputElement).value.trim(),
       azienda: (form.elements.namedItem('azienda') as HTMLInputElement).value.trim(),
@@ -136,6 +144,41 @@ export default function ContactForm() {
           className="form-input"
           placeholder="Es. 2.000–5.000 €, oppure 'da definire'"
         />
+      </div>
+
+      <div className="form-group">
+        <label
+          htmlFor="privacy"
+          style={{
+            display: 'flex',
+            gap: 10,
+            alignItems: 'flex-start',
+            cursor: 'pointer',
+            fontSize: 13.5,
+            lineHeight: 1.5,
+            color: 'var(--muted)',
+          }}
+        >
+          <input
+            type="checkbox"
+            id="privacy"
+            name="privacy"
+            required
+            style={{ marginTop: 3, flex: '0 0 auto', accentColor: 'var(--accent)' }}
+          />
+          <span>
+            Ho letto e accetto la{' '}
+            <a
+              href="/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: 'var(--accent)', textDecoration: 'underline' }}
+            >
+              Privacy Policy
+            </a>{' '}
+            e acconsento al trattamento dei dati per rispondere alla mia richiesta. *
+          </span>
+        </label>
       </div>
 
       {status === 'error' && (

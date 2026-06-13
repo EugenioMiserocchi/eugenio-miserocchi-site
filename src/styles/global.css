@@ -1526,34 +1526,61 @@ footer {
   outline-offset: 2px;
 }
 
-/* ────────── tweaks panel trigger ────────── */
-.tweaks-trigger {
+/* ────────── theme toggle (lateral flag) ────────── */
+.theme-flag {
   position: fixed;
   right: 0;
   bottom: 5%;
   width: 40px;
-  height: 40px;
-  background: var(--surface);
-  border: 1px solid var(--line);
+  height: 46px;
+  background: var(--accent);
+  border: 1px solid var(--accent);
   border-right: none;
   border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  color: var(--bg);
   display: grid;
   place-items: center;
   cursor: pointer;
   z-index: 45;
+  box-shadow: -4px 0 18px -12px color-mix(in oklab, var(--accent) 60%, transparent);
   transition:
-    background 200ms var(--ease),
-    transform 200ms var(--ease);
+    width 280ms var(--ease),
+    box-shadow 280ms var(--ease),
+    filter 200ms var(--ease);
 }
-.tweaks-trigger:hover {
-  background: var(--bg-2);
-  transform: translateX(-2px);
+.theme-flag:hover {
+  width: 52px;
+  filter: brightness(1.07);
+  box-shadow: -9px 0 30px -10px color-mix(in oklab, var(--accent) 72%, transparent);
 }
-.tweaks-trigger .icon {
+.theme-flag-icons {
+  position: relative;
+  display: block;
   width: 20px;
   height: 20px;
-  background-color: var(--accent);
-  -webkit-mask: url('/y2k/sparkle-4pt.svg') center/contain no-repeat;
-  mask: url('/y2k/sparkle-4pt.svg') center/contain no-repeat;
-  animation: y2kSpin 7s linear infinite;
+}
+.theme-flag svg {
+  position: absolute;
+  inset: 0;
+  width: 20px;
+  height: 20px;
+  transition:
+    opacity 300ms var(--ease),
+    transform 420ms var(--ease);
+}
+.theme-flag .sun {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+.theme-flag .moon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+[data-theme='dark'] .theme-flag .sun {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+[data-theme='dark'] .theme-flag .moon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
 }

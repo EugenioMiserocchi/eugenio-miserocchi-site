@@ -1,9 +1,12 @@
 ---
 import SEOHead from '../components/SEOHead.astro';
+import Analytics from '../components/Analytics.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import TweaksPanel from '../components/TweaksPanel.tsx';
+import ThemeToggle from '../components/ThemeToggle.tsx';
 import '../styles/global.css';
+
+const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
 
 interface Props {
   title: string;
@@ -30,8 +33,12 @@ const { title, description, canonical, ogImage, type, publishedDate, schema } = 
       publishedDate={publishedDate}
       schema={schema}
     />
+    <Analytics />
   </head>
   <body>
+    {GTM_ID && (
+      <noscript set:html={`<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`} />
+    )}
     <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
     <Header />
@@ -42,7 +49,7 @@ const { title, description, canonical, ogImage, type, publishedDate, schema } = 
 
     <Footer />
 
-    <TweaksPanel client:visible />
+    <ThemeToggle client:visible />
 
     <script is:inline>
     (function(){

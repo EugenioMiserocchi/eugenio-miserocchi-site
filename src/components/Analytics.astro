@@ -1,0 +1,80 @@
+---
+// Analytics.astro stack di tracciamento GDPR-compliant
+//
+// Ordine di caricamento OBBLIGATORIO nel <head>:
+//   1. Consent Mode v2  default "denied" (nessun cookie finché l'utente non sceglie)
+//   2. Cookiebot CMP    banner + raccolta del consenso
+//   3. GTM              contenitore che ospita GA4, Microsoft Clarity, ecc.
+//
+// GA4 (G-8XTQ04SZPQ) e Clarity (x6cs6oloxt) NON sono qui: si configurano come
+// tag DENTRO GTM, con i rispettivi controlli di consenso. Così aggiungere o
+// togliere strumenti non richiede mai un redeploy del sito.
+//
+// ID da variabili d'ambiente (.env  vedi .env.example):
+//   PUBLIC_GTM_ID         es. GTM-K9FHG48X
+//   PUBLIC_COOKIEBOT_CBID  es. 04dddb6e-bc51-4984-804a-7eb3409ec76b
+// In assenza degli ID (es. dev locale) non viene iniettato nulla.
+
+const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
+const CBID = import.meta.env.PUBLIC_COOKIEBOT_CBID;
+---
+
+{
+  GTM_ID && (
+    <script is:inline data-cookieconsent="ignore">
+      {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'denied',
+        personalization_storage: 'denied',
+        security_storage: 'granted',
+        wait_for_update: 500
+      });
+      gtag('set', 'ads_data_redaction', true);
+      gtag('set', 'url_passthrough', false);
+
+      // Cookiebot -> Consent Mode: traduce la scelta dell'utente in segnali Google.
+      window.addEventListener('CookiebotOnConsentReady', function () {
+        if (typeof Cookiebot === 'undefined') return;
+        var c = Cookiebot.consent;
+        gtag('consent', 'update', {
+          ad_storage: c.marketing ? 'granted' : 'denied',
+          ad_user_data: c.marketing ? 'granted' : 'denied',
+          ad_personalization: c.marketing ? 'granted' : 'denied',
+          analytics_storage: c.statistics ? 'granted' : 'denied',
+          functionality_storage: c.preferences ? 'granted' : 'denied',
+          personalization_storage: c.preferences ? 'granted' : 'denied'
+        });
+      });
+      `}
+    </script>
+  )
+}
+
+{
+  CBID && (
+    <script
+      id="Cookiebot"
+      src="https://consent.cookiebot.com/uc.js"
+      data-cbid={CBID}
+      data-blockingmode="manual"
+      type="text/javascript"
+      is:inline
+    />
+  )
+}
+
+{
+  GTM_ID && (
+    <script is:inline define:vars={{ GTM_ID }}>
+      {`
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',GTM_ID);
+      `}
+    </script>
+  )
+}
