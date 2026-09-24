@@ -1,9 +1,9 @@
 # Setup Tracciamento & Privacy eugeniomiserocchi.it
 
 Guida operativa per attivare lo stack installato nel codice. Il sito è già
-predisposto: serve solo creare gli account, recuperare gli ID e incollarli in
-`.env`. Finché `.env` è vuoto, **niente viene caricato** (nessun tracker, nessun
-banner) e il sito funziona normalmente.
+predisposto: lo script Cookiebot usa il CBID di produzione come fallback anche
+senza `.env`. GTM resta disattivato finché `PUBLIC_GTM_ID` non è valorizzato.
+Verificare sempre banner e blocco preventivo dopo il deploy.
 
 > Architettura: **Cookiebot** (banner + consenso) → **Google Consent Mode v2**
 > (default `denied`) → **GTM** (contenitore) → dentro GTM vivono **GA4** e
@@ -72,8 +72,9 @@ PUBLIC_COOKIEBOT_CBID=04dddb6e-bc51-4984-804a-7eb3409ec76b
 1. Registrati su <https://www.cookiebot.com> (piano **Free**, fino a 50 sottopagine
    un solo dominio).
 2. Aggiungi il dominio `eugeniomiserocchi.it` e avvia la scansione.
-3. Copia il **CBID** (Settings → Your Cookiebot scripts) → mettilo in
-   `PUBLIC_COOKIEBOT_CBID`.
+3. Il **CBID** di produzione è già impostato come fallback in `Analytics.astro`
+   e `src/pages/cookie.astro`. `PUBLIC_COOKIEBOT_CBID` permette di sovrascriverlo
+   in altri ambienti senza modificare il codice.
 4. Lo script Cookiebot e la traduzione del consenso in Consent Mode sono **già nel
    sito** (`Analytics.astro`): non incollare script Cookiebot altrove.
 5. In Cookiebot → *Settings*: attiva **GDPR/CCPA** e lascia che gestisca i banner;
