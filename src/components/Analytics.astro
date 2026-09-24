@@ -13,10 +13,10 @@
 // ID da variabili d'ambiente (.env  vedi .env.example):
 //   PUBLIC_GTM_ID         es. GTM-K9FHG48X
 //   PUBLIC_COOKIEBOT_CBID  es. 04dddb6e-bc51-4984-804a-7eb3409ec76b
-// In assenza degli ID (es. dev locale) non viene iniettato nulla.
+// Cookiebot usa il CBID di produzione come fallback; GTM resta disattivato senza ID.
 
 const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
-const CBID = import.meta.env.PUBLIC_COOKIEBOT_CBID;
+const CBID = import.meta.env.PUBLIC_COOKIEBOT_CBID || '04dddb6e-bc51-4984-804a-7eb3409ec76b';
 ---
 
 {
